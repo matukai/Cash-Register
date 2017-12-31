@@ -1,12 +1,7 @@
 
 console.log("cashhhh me outside");
 
-let calcMod = calculatorModule();
-
-let bal = 0;
-
-let num1 = 0;
-let num2 = 0;
+let calc = calculatorModule();
 
 var allButtons = document.getElementsByClassName("allbtn");
     for(var i = 0; i < allButtons.length; i++ ){
@@ -14,20 +9,55 @@ var allButtons = document.getElementsByClassName("allbtn");
             updateDisplay(this.value);
         })
     }
-var operatorButtons = document.getElementsByClassName('operators');
-    for(var i = 0; i < operatorButtons.length; i++){
-
-    }
 
 
 
-var equal1 = document.getElementById("equal").addEventListener('click', function(){execute(num1,'add',num2)})
+    var operation = '';
 
-function execute(x,y,z){
-    calcMod._total = x;
-    calcMod[y] = z;
-    document.getElementById('display').innerHTML = calcMod.getTotal();
-}
+    document.getElementById("equal").addEventListener("click", function(){
+        
+           if(operation === "add"){
+                calc.add(+display.innerHTML);
+                document.getElementById("display").innerHTML = calc.getTotal();
+            } 
+            else if(operation === "subtract"){
+                calc.subtract(+display.innerHTML);
+                document.getElementById("display").innerHTML = calc.getTotal();
+            } else if(operation === "multiply"){
+                calc.multiply(+display.innerHTML);
+                document.getElementById("display").innerHTML = calc.getTotal();
+            } else if(operation === "divide"){
+                calc.divide(+display.innerHTML);
+                document.getElementById("display").innerHTML = calc.getTotal();
+            }
+        });
+
+    document.getElementById("plus").addEventListener("click", function(){
+            operation = "add";
+                var plusNumber = +display.innerHTML;
+                calc.load(plusNumber);
+                document.getElementById("display").innerHTML = "";
+            });
+    document.getElementById("minus").addEventListener("click", function(){
+            operation = "subtract";
+                var subtractNumber = +display.innerHTML;
+                calc.load(subtractNumber);
+                document.getElementById("display").innerHTML = "";
+            });
+    document.getElementById("multiply").addEventListener("click", function(){
+            operation = "multiply";
+                var multiplyNumber = +display.innerHTML;
+                calc.load(multiplyNumber);
+                document.getElementById("display").innerHTML = "";
+            });
+    document.getElementById("divide").addEventListener("click", function(){
+            operation = "divide";
+                var divideNumber = +display.innerHTML;
+                calc.load(divideNumber);
+                document.getElementById("display").innerHTML = "";
+                });
+
+
 
 function updateDisplay(num){
     var update = document.getElementById("display");
@@ -39,10 +69,20 @@ function resetDisplay (){
     var reset = document.getElementById('display').innerHTML = null;
 }
 
-document.getElementById("getBal").addEventListener('click',getBalance);
-function getBalance (){
-    var balance = document.getElementById('display').innerHTML = bal;
-}
+document.getElementById("deposit").addEventListener("click", function(){
+        var total = +display.innerHTML;
+        calc.load(total);
+        calc.addMemory();
+        document.getElementById("display").innerHTML = "0";
+    });
 
+document.getElementById("getBal").addEventListener("click", function(){
+        document.getElementById("display").innerHTML = calc.recallMemory();
+        });
 
-
+document.getElementById("withdraw").addEventListener("click", function(){
+        var total = +display.innerHTML;
+        calc.load(total);
+        calc.subtractMemory();
+        document.getElementById("display").innerHTML = "0";
+        });
