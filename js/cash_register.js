@@ -6,6 +6,7 @@ let calcMod = calculatorModule();
 let bal = 0;
 
 let num1 = 0;
+let num2 = 0;
 
 var allButtons = document.getElementsByClassName("allbtn");
     for(var i = 0; i < allButtons.length; i++ ){
@@ -13,9 +14,20 @@ var allButtons = document.getElementsByClassName("allbtn");
             updateDisplay(this.value);
         })
     }
+var operatorButtons = document.getElementsByClassName('operators');
+    for(var i = 0; i < operatorButtons.length; i++){
 
-var add = document.getElementById('addition');
-add.addEventListener('click',calcMod.add(num1));
+    }
+
+
+
+var equal1 = document.getElementById("equal").addEventListener('click', function(){execute(num1,'add',num2)})
+
+function execute(x,y,z){
+    calcMod._total = x;
+    calcMod[y] = z;
+    document.getElementById('display').innerHTML = calcMod.getTotal();
+}
 
 function updateDisplay(num){
     var update = document.getElementById("display");

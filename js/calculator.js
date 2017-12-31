@@ -1,4 +1,4 @@
-console.log("hello js");
+console.log("hello from calculator.js");
 
 /**
  * Declare a function named `calculatorModule`
